@@ -59,6 +59,7 @@ import PyPDF2
 import os
 
 # Step 1: Connect to OpenAI
+
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
