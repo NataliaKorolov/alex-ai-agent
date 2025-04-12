@@ -4,16 +4,9 @@ import PyPDF2
 import os
 from PIL import Image
 import re
+from pdf_service_extractor import read_pdf
 from pdf_service_extractor import extract_services_from_pdf
 
-# Load the PDF (same as before)
-def read_pdf(file_path):
-    with open(file_path, "rb") as f:
-        reader = PyPDF2.PdfReader(f)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text()
-    return text
 
 # Load your business content
 pdf_text = read_pdf("Delightful_Lashes_Price_List.pdf")
