@@ -76,12 +76,23 @@ if "messages" not in st.session_state:
 # User input
 user_input = st.chat_input("Ask Alex something...")
 
+service_options = [
+    "Lash Lift",
+    "Classic Full Set",
+    "Volume Fill",
+    "Hybrid Fill",
+    "Mega Volume",
+    "Lash Removal",
+    "Tinting",
+    "Other"
+]
+
 if user_input and "book" in user_input.lower():
     with st.form("booking_form", clear_on_submit=True):
         name = st.text_input("Your name")
         date = st.date_input("Preferred date")
         time = st.time_input("Preferred time")
-        service = st.text_input("Service (e.g., Lash Lift, Classic Fill...)")
+        service = st.selectbox("Choose a service", service_options)
         submitted = st.form_submit_button("Submit Booking Request")
 
         if submitted:
