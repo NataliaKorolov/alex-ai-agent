@@ -15,9 +15,7 @@ def read_pdf(file_path):
     return text
 
 
-def extract_services_from_pdf(file_path):
-    pdf_text = read_pdf(file_path)
-
+def extract_services_from_pdf_text(pdf_text):
     extract_prompt = f"""
 You are a helpful assistant reading a salon price list.
 
@@ -27,7 +25,7 @@ Here is the text:
 ---
 {pdf_text}
 ---
-Return just the list like: ["Lash Lift", "Volume Fill", "Lash Removal"]
+Return just the list like: [\"Lash Lift\", \"Volume Fill\", \"Lash Removal\"]
 """
 
     response = client.chat.completions.create(
@@ -40,7 +38,8 @@ Return just the list like: ["Lash Lift", "Volume Fill", "Lash Removal"]
 
     return ast.literal_eval(response.choices[0].message.content)
 
-# Example usage
+# Example usage:
 if __name__ == "__main__":
-    services = extract_services_from_pdf("Delightful_Lashes_Price_List.pdf")
+    pdf_text = read_pdf("Delightful_Lashes_Price_List.pdf")
+    services = extract_services_from_pdf_text(pdf_text)
     print("Extracted services:", services)

@@ -5,11 +5,13 @@ import os
 from PIL import Image
 import re
 from pdf_service_extractor import read_pdf
-from pdf_service_extractor import extract_services_from_pdf
+from pdf_service_extractor import extract_services_from_pdf_text
 
 
 # Load your business content
 pdf_text = read_pdf("Delightful_Lashes_Price_List.pdf")
+
+service_options = extract_services_from_pdf_text(pdf_text)
 
 
 # Step 1: Connect to OpenAI
@@ -70,7 +72,7 @@ if "messages" not in st.session_state:
 # User input
 user_input = st.chat_input("Ask Alex something...")
 
-service_options = extract_services_from_pdf("Delightful_Lashes_Price_List.pdf")
+
 
 if user_input and "book" in user_input.lower():
     with st.form("booking_form", clear_on_submit=True):
