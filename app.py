@@ -76,6 +76,20 @@ if "messages" not in st.session_state:
 # User input
 user_input = st.chat_input("Ask Alex something...")
 
+if user_input and "book" in user_input.lower():
+    with st.form("booking_form", clear_on_submit=True):
+        name = st.text_input("Your name")
+        date = st.date_input("Preferred date")
+        time = st.time_input("Preferred time")
+        service = st.text_input("Service (e.g., Lash Lift, Classic Fill...)")
+        submitted = st.form_submit_button("Submit Booking Request")
+
+        if submitted:
+            booking_info = f"📅 Booking Request:\n- Name: {name}\n- Date: {date}\n- Time: {time}\n- Service: {service}"
+            st.success("Thank you! We've received your request 💖")
+            st.session_state.messages.append({"role": "assistant", "content": booking_info})
+
+
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
 
