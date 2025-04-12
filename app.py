@@ -34,6 +34,34 @@ If the question is general, respond like a helpful business assistant.
 
 # Start Streamlit app
 st.set_page_config(page_title="Chat with Alex", layout="centered")
+
+st.markdown("""
+    <style>
+    body {
+        background-color: #fffafc;
+    }
+    .stApp {
+        background: linear-gradient(to bottom right, #fff0f5, #e6e6fa);
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .stChatMessage {
+        background-color: #ffffff44;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .stChatMessage.user {
+        background-color: #dce9f9;
+        color: #000;
+    }
+    .stChatMessage.assistant {
+        background-color: #fef9ec;
+        color: #222;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 st.title("💬 Chat with Alex — Delightful Lashes AI Assistant")
 
 # Session-based message storage
