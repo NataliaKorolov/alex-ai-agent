@@ -37,7 +37,7 @@ If the question is general, respond like a helpful business assistant.
 # Start Streamlit app
 st.set_page_config(page_title="Chat with Alex", layout="centered")
 
-logo = Image.open("DelightfulLashesLogo.avif")
+logo = Image.open("DelightfulLashesLogo.png")
 st.image(logo, width=300)  # You can change width to fit your layout
 
 st.markdown("""
