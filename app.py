@@ -4,6 +4,7 @@ import PyPDF2
 import os
 from PIL import Image
 import re
+from pdf_service_extractor import extract_services_from_pdf
 
 # Load the PDF (same as before)
 def read_pdf(file_path):
@@ -76,15 +77,7 @@ if "messages" not in st.session_state:
 # User input
 user_input = st.chat_input("Ask Alex something...")
 
-# Function to extract service names from the PDF
-def extract_services_from_pdf(pdf_text):
-    # Simple pattern: service name before price (like "Lash Lift - $80")
-    pattern = r"^(.*?)(?:\s*[-–—]\s*\$[\d]+)"  # Flexible dash & price format
-    matches = re.findall(pattern, pdf_text, re.MULTILINE)
-    services = [s.strip() for s in matches if len(s.strip()) > 2]
-    return sorted(set(services))  # Remove duplicates, sort alphabetically
-
-service_options = extract_services_from_pdf(pdf_text)
+service_options = extract_services_from_pdf("Delightful_Lashes_Price_List.pdf")
 
 if user_input and "book" in user_input.lower():
     with st.form("booking_form", clear_on_submit=True):
