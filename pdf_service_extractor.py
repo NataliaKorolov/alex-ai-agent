@@ -25,7 +25,7 @@ Here is the text:
 ---
 {pdf_text}
 ---
-Return just the list like: [\"Lash Lift\", \"Volume Fill\", \"Lash Removal\"]
+Return just the list like: ["Lash Lift", "Volume Fill", "Lash Removal"]
 """
 
     response = client_for_pdf_parsing.chat.completions.create(
@@ -36,7 +36,23 @@ Return just the list like: [\"Lash Lift\", \"Volume Fill\", \"Lash Removal\"]
         ]
     )
 
-    return ast.literal_eval(response.choices[0].message.content)
+    raw_output = response.choices[0].message.content.strip()
+    
+    print("DEBUG: Raw response from OpenAI:\n", raw_output)  # Add this to check what's coming back
+
+    # Try parsing safely
+    try:
+        return ast.literal_eval(raw_output)
+    except (SyntaxError, ValueError):
+        # Fallback: try extracting list using regex
+        import re
+        match = re.search(r"\[.*\]", raw_output, re.DOTALL)
+        if match:
+            try:
+                return ast.literal_eval(match.group(0))
+            except Exception:
+                pass
+        raise ValueError("OpenAI response is not a valid Python list.")
 
 # Example usage:
 if __name__ == "__main__":
