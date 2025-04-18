@@ -11,18 +11,18 @@ from pdf_service_extractor import extract_services_from_pdf_text
 # Load your business content
 pdf_text = read_pdf("Delightful_Lashes_Price_List.pdf")
 
-# service_options = extract_services_from_pdf_text(pdf_text)
+service_options = extract_services_from_pdf_text(pdf_text)
 
-service_options = [
-    "Lash Lift",
-    "Classic Full Set",
-    "Volume Fill",
-    "Hybrid Fill",
-    "Mega Volume",
-    "Lash Removal",
-    "Tinting",
-    "Other"
-]
+# service_options = [
+#     "Lash Lift",
+#     "Classic Full Set",
+#     "Volume Fill",
+#     "Hybrid Fill",
+#     "Mega Volume",
+#     "Lash Removal",
+#     "Tinting",
+#     "Other"
+# ]
 
 
 # Step 1: Connect to OpenAI
