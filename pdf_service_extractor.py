@@ -4,7 +4,7 @@ import ast
 from openai import OpenAI
 
 # Load OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client_for_pdf_parsing = OpenAI(api_key=os.getenv("OPENAI_API_KEY_FOR_PDF_PARSING"))
 
 def read_pdf(file_path):
     with open(file_path, "rb") as f:
@@ -28,7 +28,7 @@ Here is the text:
 Return just the list like: [\"Lash Lift\", \"Volume Fill\", \"Lash Removal\"]
 """
 
-    response = client.chat.completions.create(
+    response = client_for_pdf_parsing.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that extracts structured data from text."},
